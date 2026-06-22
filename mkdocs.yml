@@ -1,0 +1,116 @@
+site_name: Federer
+site_description: >-
+  Plano de control tipo kubectl para un mini-cluster de ESP32 que entrena
+  con aprendizaje federado (FedAvg) y gossip learning.
+site_author: Vallit0
+site_url: https://vallit0.github.io/federer/
+repo_name: Vallit0/federer
+repo_url: https://github.com/Vallit0/federer
+copyright: Copyright &copy; 2026 Vallit0 — MIT License
+
+theme:
+  name: material
+  language: es
+  logo: assets/logo.png
+  favicon: assets/logo.png
+  font:
+    text: Inter
+    code: JetBrains Mono
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep orange
+      accent: orange
+      toggle:
+        icon: material/weather-night
+        name: Cambiar a modo oscuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep orange
+      accent: orange
+      toggle:
+        icon: material/weather-sunny
+        name: Cambiar a modo claro
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - def_list
+  - tables
+  - footnotes
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.keys
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+extra_javascript:
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+plugins:
+  - search:
+      lang: es
+  - minify:
+      minify_html: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Vallit0/federer
+  generator: false
+
+nav:
+  - Inicio: index.md
+  - Primeros pasos:
+      - Instalación y setup: getting-started.md
+      - Provisionar nodos: provisioning.md
+      - Panel web: web-ui.md
+  - Conceptos:
+      - Arquitectura: architecture.md
+      - Modos de entrenamiento: modos.md
+      - Aprendizaje federado (FedAvg): fedavg.md
+      - Gossip learning: gossip.md
+  - Referencia:
+      - CLI de Federer: cli.md
+      - Protocolo MQTT: mqtt.md
+      - Firmware del ESP32: firmware.md
+      - Métricas: metrics.md
+  - Ayuda:
+      - Solución de problemas: troubleshooting.md
+      - FAQ: faq.md

@@ -1,0 +1,4 @@
+# Federer - dependencias para construir la documentacion
+mkdocs-material>=9.5
+mkdocs-minify-plugin>=0.8
+pymdown-extensions>=10.7

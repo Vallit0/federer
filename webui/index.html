@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Federer · Panel</title>
+  <link rel="icon" href="logo.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="logo.png" alt="Federer">
+    </div>
+    <nav>
+      <button class="nav-item active" data-view="overview"><span>🛰️</span> Cluster</button>
+      <button class="nav-item" data-view="train"><span>🧠</span> Entrenar</button>
+      <button class="nav-item" data-view="config"><span>⚙️</span> Config</button>
+      <button class="nav-item" data-view="firmware"><span>📡</span> Firmware</button>
+      <button class="nav-item" data-view="logs"><span>📜</span> Consola</button>
+    </nav>
+    <div class="sidebar-foot">
+      <div id="conn" class="conn off"><span class="dot"></span> conectando…</div>
+      <a href="https://github.com/Vallit0/federer" target="_blank" rel="noopener">v3.0-AB · docs</a>
+    </div>
+  </aside>
+
+  <main>
+    <!-- ============ CLUSTER ============ -->
+    <section id="overview" class="view active">
+      <header class="topbar">
+        <h1>Cluster</h1>
+        <div class="actions">
+          <button id="btn-discover" class="btn">Descubrir nodos</button>
+        </div>
+      </header>
+
+      <div class="cards">
+        <div class="card stat"><div class="k" id="s-online">–</div><div class="l">nodos online</div></div>
+        <div class="card stat"><div class="k" id="s-total">–</div><div class="l">nodos totales</div></div>
+        <div class="card stat"><div class="k" id="s-mode">–</div><div class="l">modo activo</div></div>
+        <div class="card stat"><div class="k" id="s-job">inactivo</div><div class="l">trabajo</div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Nodos</div>
+        <div class="table-wrap">
+          <table id="nodes">
+            <thead>
+              <tr><th>ID</th><th>Estado</th><th>Modo</th><th>IP</th><th>Muestras</th>
+                  <th>Heap</th><th>RSSI</th><th>Ronda</th><th>MSE</th><th>FW</th><th>Visto</th><th></th></tr>
+            </thead>
+            <tbody><tr><td colspan="12" class="empty">sin nodos…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ENTRENAR ============ -->
+    <section id="train" class="view">
+      <header class="topbar"><h1>Entrenar</h1>
+        <div class="actions">
+          <span id="train-state" class="badge idle">inactivo</span>
+          <button id="btn-stop" class="btn danger" disabled>Detener</button>
+        </div>
+      </header>
+
+      <div class="grid2">
+        <div class="card">
+          <div class="card-title">🟢 Config A · FedAvg</div>
+          <p class="muted">Aprendizaje federado coordinado por rondas.</p>
+          <label>N (tamaño cluster) <input id="fa-N" type="number" min="1" placeholder="auto"></label>
+          <label>Máx. rondas <input id="fa-rondas" type="number" min="1" placeholder="30"></label>
+          <button id="btn-fedavg" class="btn primary">Correr FedAvg</button>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🔵 Config B · Gossip</div>
+          <p class="muted">Gossip learning descentralizado, por tiempo.</p>
+          <label>N (tamaño cluster) <input id="go-N" type="number" min="1" placeholder="auto"></label>
+          <label>Duración (s) <input id="go-dur" type="number" min="1" value="60"></label>
+          <label>t_gossip (ms) <input id="go-tg" type="number" min="100" value="3000"></label>
+          <button id="btn-gossip" class="btn primary">Correr Gossip</button>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <div class="card-title">Convergencia FedAvg (RMSE global)</div>
+          <canvas id="chart-conv" height="220"></canvas>
+        </div>
+        <div class="card">
+          <div class="card-title">Consenso Gossip (RMSE prom · dispersión)</div>
+          <canvas id="chart-gossip" height="220"></canvas>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Salida del experimento</div>
+        <pre id="train-log" class="console small"></pre>
+      </div>
+    </section>
+
+    <!-- ============ CONFIG ============ -->
+    <section id="config" class="view">
+      <header class="topbar"><h1>Configuración</h1></header>
+      <div class="grid2">
+        <div class="card">
+          <div class="card-title">Hiperparámetros</div>
+          <p class="muted">Se envían al cluster por <code>cluster/config</code>. Vacío = sin cambio.</p>
+          <label>lr <input id="cf-lr" type="number" step="0.001" placeholder="0.01"></label>
+          <label>beta <input id="cf-beta" type="number" step="0.01" placeholder="0.9"></label>
+          <label>epocas <input id="cf-ep" type="number" placeholder="5"></label>
+          <button id="btn-config" class="btn primary">Enviar config</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Modo de entrenamiento</div>
+          <p class="muted">Conmuta el modo de todos los nodos por <code>cluster/mode</code>.</p>
+          <div class="row">
+            <button class="btn mode" data-mode="fedavg">🟢 FedAvg</button>
+            <button class="btn mode" data-mode="gossip">🔵 Gossip</button>
+            <button class="btn mode" data-mode="idle">⚪ Idle</button>
+          </div>
+          <hr>
+          <div class="card-title">Comando a un nodo</div>
+          <label>Nodo (-1 = todos) <input id="cmd-node" type="number" value="-1"></label>
+          <div class="row">
+            <button class="btn" data-cmd="reboot">Reboot</button>
+            <button class="btn" data-cmd="reset">Reset pesos</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FIRMWARE ============ -->
+    <section id="firmware" class="view">
+      <header class="topbar"><h1>Firmware</h1></header>
+      <div class="grid2">
+        <div class="card">
+          <div class="card-title">🔌 Provisionar (USB)</div>
+          <p class="muted">Genera la partición y graba un ESP32 nuevo por cable.</p>
+          <label>NODE_ID <input id="pv-id" type="number" value="0"></label>
+          <label>N (tamaño cluster) <input id="pv-N" type="number" value="4"></label>
+          <label>Puerto USB <input id="pv-port" type="text" placeholder="auto"></label>
+          <button id="btn-provision" class="btn primary">Grabar por USB</button>
+        </div>
+        <div class="card">
+          <div class="card-title">📡 Actualizar (OTA)</div>
+          <p class="muted">Regraba por Wi-Fi nodos ya online.</p>
+          <label>Nodo (-1 = todos online) <input id="ota-target" type="text" value="-1"></label>
+          <label>N (tamaño cluster) <input id="ota-N" type="number" placeholder="auto"></label>
+          <button id="btn-ota" class="btn primary">Actualizar por red</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Salida de PlatformIO</div>
+        <pre id="fw-log" class="console small"></pre>
+      </div>
+    </section>
+
+    <!-- ============ CONSOLA ============ -->
+    <section id="logs" class="view">
+      <header class="topbar"><h1>Consola</h1></header>
+      <div class="card">
+        <pre id="full-log" class="console"></pre>
+      </div>
+    </section>
+
+    <div id="toast" class="toast"></div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

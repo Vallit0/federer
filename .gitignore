@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# PlatformIO
+.pio/
+firmware_esp32/.pio/
+firmware_esp32/include/datos_nodo.h   # generado por Federer (provision/ota)
+
+# Datos y metricas generadas en tiempo de ejecucion
+prueba.csv
+convergencia_fedavg.csv
+metricas_fedavg.csv
+telemetria_cluster.csv
+
+# MkDocs
+site/
+
+# SO / editor
+.DS_Store
+.vscode/
+.idea/

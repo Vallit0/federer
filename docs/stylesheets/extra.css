@@ -1,0 +1,96 @@
+:root {
+  --md-primary-fg-color:        #EE7623;
+  --md-primary-fg-color--light: #F4914E;
+  --md-primary-fg-color--dark:  #C75B12;
+  --md-accent-fg-color:         #F47B20;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-hue: 222;
+}
+
+/* ---------------- Hero de la landing ---------------- */
+.fd-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 1rem 1.5rem;
+}
+
+.fd-hero img {
+  width: min(440px, 80vw);
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.15));
+}
+
+.fd-hero h1 {
+  font-weight: 800;
+  font-size: 2.4rem;
+  margin: 0.2rem 0;
+  letter-spacing: -0.02em;
+}
+
+.fd-hero p.tagline {
+  font-size: 1.15rem;
+  max-width: 40rem;
+  color: var(--md-default-fg-color--light);
+  margin: 0.4rem auto 1.4rem;
+}
+
+.fd-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+  margin-bottom: 1.6rem;
+}
+
+.fd-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+}
+
+.fd-cta .md-button {
+  min-width: 12rem;
+}
+
+/* ---------------- Grid de features ---------------- */
+.fd-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.fd-card {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.6rem;
+  padding: 1.2rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  background: var(--md-default-bg-color);
+}
+
+.fd-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(238, 118, 35, 0.15);
+  border-color: var(--md-primary-fg-color--light);
+}
+
+.fd-card .fd-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.fd-card h3 {
+  margin: 0.5rem 0 0.3rem;
+  font-size: 1.05rem;
+}
+
+.fd-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--md-default-fg-color--light);
+}

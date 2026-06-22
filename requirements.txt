@@ -1,0 +1,9 @@
+# Federer - dependencias del plano de control (host)
+paho-mqtt>=2.0
+rich>=13.0
+numpy>=1.24
+pandas>=2.0
+scikit-learn>=1.3
+platformio>=6.1
+# Opcional: descarga automatica del dataset Crop Recommendation desde Kaggle
+kagglehub>=0.3
