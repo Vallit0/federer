@@ -5,9 +5,14 @@ const $ = (s) => document.querySelector(s);
 const $$ = (s) => document.querySelectorAll(s);
 const MODE_NAME = { 0: "idle", 1: "fedavg", 2: "gossip" };
 
+// ---------------- iconos SVG (sin emojis) ----------------
+const IC_CHECK = '<svg class="ic-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+const IC_ERR = '<svg class="ic-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+const IC_REBOOT = '<svg class="ic-sm" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>';
+
 function toast(msg, isErr) {
   const t = $("#toast");
-  t.textContent = msg;
+  t.innerHTML = (isErr ? IC_ERR : IC_CHECK) + "<span>" + msg + "</span>";
   t.className = "toast show" + (isErr ? " err" : "");
   clearTimeout(toast._t);
   toast._t = setTimeout(() => (t.className = "toast"), 2600);
@@ -22,7 +27,7 @@ async function api(path, body) {
     });
     const j = await r.json();
     if (!j.ok) { toast(j.error || "error", true); return j; }
-    toast("✓ " + path.replace("/api/", ""));
+    toast(path.replace("/api/", ""));
     refresh();
     return j;
   } catch (e) { toast("sin conexión con Federer", true); }
@@ -59,8 +64,8 @@ $("#btn-ota").onclick = () =>
 // ---------------- render ----------------
 function badgeMode(m) {
   const name = typeof m === "number" ? MODE_NAME[m] : m;
-  if (name === "fedavg") return '<span class="badge fedavg">fedavg</span>';
-  if (name === "gossip") return '<span class="badge gossip">gossip</span>';
+  if (name === "fedavg") return '<span class="badge fedavg"><span class="bdot"></span>fedavg</span>';
+  if (name === "gossip") return '<span class="badge gossip"><span class="bdot"></span>gossip</span>';
   if (name === "idle") return '<span class="badge idle">idle</span>';
   return '<span class="badge idle">–</span>';
 }
@@ -87,7 +92,7 @@ function render(s) {
       .map(
         (n) => `<tr>
         <td>${n.id}</td>
-        <td>${n.online ? '<span class="badge on">online</span>' : '<span class="badge off">perdido</span>'}</td>
+        <td>${n.online ? '<span class="badge on"><span class="bdot"></span>online</span>' : '<span class="badge off"><span class="bdot"></span>perdido</span>'}</td>
         <td>${badgeMode(n.mode)}</td>
         <td>${n.ip || "–"}</td>
         <td>${n.n ?? "–"}</td>
@@ -97,7 +102,7 @@ function render(s) {
         <td>${n.mse != null ? Number(n.mse).toFixed(3) : "–"}</td>
         <td>${n.fw || "–"}</td>
         <td>${n.seen}s</td>
-        <td><button class="btn" onclick="api('/api/cmd',{cmd:'reboot',node:${n.id}})">⟳</button></td>
+        <td><button class="btn icon-only" title="Reboot" onclick="api('/api/cmd',{cmd:'reboot',node:${n.id}})">${IC_REBOOT}</button></td>
       </tr>`
       )
       .join("");
@@ -149,7 +154,7 @@ function lineChart(canvas, series, opts) {
 
   const all = series.flatMap((s) => s.pts);
   if (!all.length) {
-    ctx.fillStyle = "#8b97a7"; ctx.font = "13px sans-serif";
+    ctx.fillStyle = "#9AA1AC"; ctx.font = "13px sans-serif";
     ctx.fillText("sin datos todavía…", pad.l, pad.t + H / 2);
     return;
   }
@@ -163,7 +168,7 @@ function lineChart(canvas, series, opts) {
   const Y = (y) => pad.t + H - ((y - minY) / (maxY - minY)) * H;
 
   // grid + ejes Y
-  ctx.strokeStyle = "#2b3340"; ctx.fillStyle = "#8b97a7";
+  ctx.strokeStyle = "#E6E8EC"; ctx.fillStyle = "#6B7280";
   ctx.font = "11px monospace"; ctx.lineWidth = 1;
   for (let i = 0; i <= 4; i++) {
     const yy = pad.t + (H / 4) * i;
@@ -186,7 +191,7 @@ function lineChart(canvas, series, opts) {
   let lx = pad.l;
   series.forEach((s) => {
     ctx.fillStyle = s.color; ctx.fillRect(lx, h - 14, 12, 4);
-    ctx.fillStyle = "#b9c4d2"; ctx.font = "11px sans-serif";
+    ctx.fillStyle = "#475569"; ctx.font = "11px sans-serif";
     ctx.fillText(s.label, lx + 16, h - 10);
     lx += 24 + ctx.measureText(s.label).width + 16;
   });
@@ -194,12 +199,12 @@ function lineChart(canvas, series, opts) {
 
 function drawConv(conv) {
   lineChart($("#chart-conv"), [
-    { pts: conv.map((d) => ({ x: d.ronda, y: d.rmse })), color: "#2ecc71", label: "RMSE global" },
+    { pts: conv.map((d) => ({ x: d.ronda, y: d.rmse })), color: "#16A34A", label: "RMSE global" },
   ]);
 }
 function drawGossip(g) {
   lineChart($("#chart-gossip"), [
-    { pts: g.map((d) => ({ x: d.t, y: d.rmse_prom })), color: "#3b82f6", label: "RMSE prom" },
+    { pts: g.map((d) => ({ x: d.t, y: d.rmse_prom })), color: "#2563EB", label: "RMSE prom" },
     { pts: g.map((d) => ({ x: d.t, y: d.disp })), color: "#EE7623", label: "dispersión" },
   ]);
 }

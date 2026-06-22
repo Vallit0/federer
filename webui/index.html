@@ -13,15 +13,33 @@
       <img src="logo.png" alt="Federer">
     </div>
     <nav>
-      <button class="nav-item active" data-view="overview"><span>🛰️</span> Cluster</button>
-      <button class="nav-item" data-view="train"><span>🧠</span> Entrenar</button>
-      <button class="nav-item" data-view="config"><span>⚙️</span> Config</button>
-      <button class="nav-item" data-view="firmware"><span>📡</span> Firmware</button>
-      <button class="nav-item" data-view="logs"><span>📜</span> Consola</button>
+      <button class="nav-item active" data-view="overview">
+        <svg class="ic" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="8" rx="2"/><rect x="2" y="13" width="20" height="8" rx="2"/><line x1="6" y1="7" x2="6.01" y2="7"/><line x1="6" y1="17" x2="6.01" y2="17"/></svg>
+        Cluster
+      </button>
+      <button class="nav-item" data-view="train">
+        <svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+        Entrenar
+      </button>
+      <button class="nav-item" data-view="config">
+        <svg class="ic" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+        Config
+      </button>
+      <button class="nav-item" data-view="firmware">
+        <svg class="ic" viewBox="0 0 24 24"><line x1="22" y1="12" x2="2" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" y1="16" x2="6.01" y2="16"/><line x1="10" y1="16" x2="10.01" y2="16"/></svg>
+        Firmware
+      </button>
+      <button class="nav-item" data-view="logs">
+        <svg class="ic" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        Consola
+      </button>
     </nav>
     <div class="sidebar-foot">
       <div id="conn" class="conn off"><span class="dot"></span> conectando…</div>
-      <a href="https://github.com/Vallit0/federer" target="_blank" rel="noopener">v3.0-AB · docs</a>
+      <a href="https://github.com/Vallit0/federer" target="_blank" rel="noopener">
+        <svg class="ic-sm" viewBox="0 0 24 24" style="stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        v3.0-AB · docs
+      </a>
     </div>
   </aside>
 
@@ -31,7 +49,10 @@
       <header class="topbar">
         <h1>Cluster</h1>
         <div class="actions">
-          <button id="btn-discover" class="btn">Descubrir nodos</button>
+          <button id="btn-discover" class="btn">
+            <svg class="ic-sm" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Descubrir nodos
+          </button>
         </div>
       </header>
 
@@ -43,7 +64,10 @@
       </div>
 
       <div class="card">
-        <div class="card-title">Nodos</div>
+        <div class="card-title">
+          <svg class="ic-title" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="8" rx="2"/><rect x="2" y="13" width="20" height="8" rx="2"/><line x1="6" y1="7" x2="6.01" y2="7"/><line x1="6" y1="17" x2="6.01" y2="17"/></svg>
+          Nodos
+        </div>
         <div class="table-wrap">
           <table id="nodes">
             <thead>
@@ -61,42 +85,66 @@
       <header class="topbar"><h1>Entrenar</h1>
         <div class="actions">
           <span id="train-state" class="badge idle">inactivo</span>
-          <button id="btn-stop" class="btn danger" disabled>Detener</button>
+          <button id="btn-stop" class="btn danger" disabled>
+            <svg class="ic-sm" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
+            Detener
+          </button>
         </div>
       </header>
 
       <div class="grid2">
         <div class="card">
-          <div class="card-title">🟢 Config A · FedAvg</div>
+          <div class="card-title fa">
+            <svg class="ic-title" viewBox="0 0 24 24"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg>
+            Config A · FedAvg
+          </div>
           <p class="muted">Aprendizaje federado coordinado por rondas.</p>
           <label>N (tamaño cluster) <input id="fa-N" type="number" min="1" placeholder="auto"></label>
           <label>Máx. rondas <input id="fa-rondas" type="number" min="1" placeholder="30"></label>
-          <button id="btn-fedavg" class="btn primary">Correr FedAvg</button>
+          <button id="btn-fedavg" class="btn primary">
+            <svg class="ic-sm" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Correr FedAvg
+          </button>
         </div>
 
         <div class="card">
-          <div class="card-title">🔵 Config B · Gossip</div>
+          <div class="card-title go">
+            <svg class="ic-title" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Config B · Gossip
+          </div>
           <p class="muted">Gossip learning descentralizado, por tiempo.</p>
           <label>N (tamaño cluster) <input id="go-N" type="number" min="1" placeholder="auto"></label>
           <label>Duración (s) <input id="go-dur" type="number" min="1" value="60"></label>
           <label>t_gossip (ms) <input id="go-tg" type="number" min="100" value="3000"></label>
-          <button id="btn-gossip" class="btn primary">Correr Gossip</button>
+          <button id="btn-gossip" class="btn primary">
+            <svg class="ic-sm" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Correr Gossip
+          </button>
         </div>
       </div>
 
       <div class="grid2">
         <div class="card">
-          <div class="card-title">Convergencia FedAvg (RMSE global)</div>
+          <div class="card-title">
+            <svg class="ic-title" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M19 9l-5 5-4-4-3 3"/></svg>
+            Convergencia FedAvg (RMSE global)
+          </div>
           <canvas id="chart-conv" height="220"></canvas>
         </div>
         <div class="card">
-          <div class="card-title">Consenso Gossip (RMSE prom · dispersión)</div>
+          <div class="card-title">
+            <svg class="ic-title" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M19 9l-5 5-4-4-3 3"/></svg>
+            Consenso Gossip (RMSE prom · dispersión)
+          </div>
           <canvas id="chart-gossip" height="220"></canvas>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-title">Salida del experimento</div>
+        <div class="card-title">
+          <svg class="ic-title" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          Salida del experimento
+        </div>
         <pre id="train-log" class="console small"></pre>
       </div>
     </section>
@@ -106,27 +154,45 @@
       <header class="topbar"><h1>Configuración</h1></header>
       <div class="grid2">
         <div class="card">
-          <div class="card-title">Hiperparámetros</div>
+          <div class="card-title">
+            <svg class="ic-title" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+            Hiperparámetros
+          </div>
           <p class="muted">Se envían al cluster por <code>cluster/config</code>. Vacío = sin cambio.</p>
           <label>lr <input id="cf-lr" type="number" step="0.001" placeholder="0.01"></label>
           <label>beta <input id="cf-beta" type="number" step="0.01" placeholder="0.9"></label>
           <label>epocas <input id="cf-ep" type="number" placeholder="5"></label>
-          <button id="btn-config" class="btn primary">Enviar config</button>
+          <button id="btn-config" class="btn primary">
+            <svg class="ic-sm" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Enviar config
+          </button>
         </div>
         <div class="card">
-          <div class="card-title">Modo de entrenamiento</div>
+          <div class="card-title">
+            <svg class="ic-title" viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+            Modo de entrenamiento
+          </div>
           <p class="muted">Conmuta el modo de todos los nodos por <code>cluster/mode</code>.</p>
           <div class="row">
-            <button class="btn mode" data-mode="fedavg">🟢 FedAvg</button>
-            <button class="btn mode" data-mode="gossip">🔵 Gossip</button>
-            <button class="btn mode" data-mode="idle">⚪ Idle</button>
+            <button class="btn mode" data-mode="fedavg"><span class="dot-c fa"></span> FedAvg</button>
+            <button class="btn mode" data-mode="gossip"><span class="dot-c go"></span> Gossip</button>
+            <button class="btn mode" data-mode="idle"><span class="dot-c idle"></span> Idle</button>
           </div>
           <hr>
-          <div class="card-title">Comando a un nodo</div>
+          <div class="card-title">
+            <svg class="ic-title" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            Comando a un nodo
+          </div>
           <label>Nodo (-1 = todos) <input id="cmd-node" type="number" value="-1"></label>
           <div class="row">
-            <button class="btn" data-cmd="reboot">Reboot</button>
-            <button class="btn" data-cmd="reset">Reset pesos</button>
+            <button class="btn" data-cmd="reboot">
+              <svg class="ic-sm" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              Reboot
+            </button>
+            <button class="btn" data-cmd="reset">
+              <svg class="ic-sm" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              Reset pesos
+            </button>
           </div>
         </div>
       </div>
@@ -137,23 +203,38 @@
       <header class="topbar"><h1>Firmware</h1></header>
       <div class="grid2">
         <div class="card">
-          <div class="card-title">🔌 Provisionar (USB)</div>
+          <div class="card-title">
+            <svg class="ic-title" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Provisionar (USB)
+          </div>
           <p class="muted">Genera la partición y graba un ESP32 nuevo por cable.</p>
           <label>NODE_ID <input id="pv-id" type="number" value="0"></label>
           <label>N (tamaño cluster) <input id="pv-N" type="number" value="4"></label>
           <label>Puerto USB <input id="pv-port" type="text" placeholder="auto"></label>
-          <button id="btn-provision" class="btn primary">Grabar por USB</button>
+          <button id="btn-provision" class="btn primary">
+            <svg class="ic-sm" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Grabar por USB
+          </button>
         </div>
         <div class="card">
-          <div class="card-title">📡 Actualizar (OTA)</div>
+          <div class="card-title">
+            <svg class="ic-title" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+            Actualizar (OTA)
+          </div>
           <p class="muted">Regraba por Wi-Fi nodos ya online.</p>
           <label>Nodo (-1 = todos online) <input id="ota-target" type="text" value="-1"></label>
           <label>N (tamaño cluster) <input id="ota-N" type="number" placeholder="auto"></label>
-          <button id="btn-ota" class="btn primary">Actualizar por red</button>
+          <button id="btn-ota" class="btn primary">
+            <svg class="ic-sm" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+            Actualizar por red
+          </button>
         </div>
       </div>
       <div class="card">
-        <div class="card-title">Salida de PlatformIO</div>
+        <div class="card-title">
+          <svg class="ic-title" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          Salida de PlatformIO
+        </div>
         <pre id="fw-log" class="console small"></pre>
       </div>
     </section>
