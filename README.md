@@ -4,9 +4,8 @@
 
 # Federer
 
-**Plano de control tipo `kubectl` para un mini-cluster de ESP32 que entrena de dos formas: _aprendizaje federado_ (FedAvg) y _gossip learning_.**
+**Plano de control para un mini-cluster de ESP32 que entrena de dos formas: _aprendizaje federado_ (FedAvg) y _gossip learning_.**
 
-_Como el tenista: **Fed**erated + Federer._ 🎾
 
 [![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![ESP32](https://img.shields.io/badge/ESP32-Arduino-E7352C?logo=espressif&logoColor=white)](https://www.espressif.com/)
